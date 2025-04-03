@@ -5,6 +5,9 @@
     <title>타임리프 index3.html</title>
 </head>
 <body>
+<!--  '#' 붙이는 이유 = 유틸리티 객체(Thymeleaf 내부에서 제공하는 객체)-->
+<!-- #dates : java 7 이하 (java.util) -->
+<!-- #temporals : LocalDate, LocalDateTime 등 Java 8 이상 (java.time) - 추천 -->
 <p th:text="${ #dates.format(standardDate, 'yyyy/MM/dd HH:mm:ss') }"></p>
 <p th:text="${ #temporals.format(localDate, 'yyyy/MM/dd') }"></p>
 <p th:text="${ #temporals.format(localDateTime, 'yyyy/MM/dd HH:mm:ss') }"></p>

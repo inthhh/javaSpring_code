@@ -6,10 +6,12 @@
 </head>
 <body>
 <h2>클래스 객체와 객체 리스트 출력</h2>
+<!-- 객체 내부 요소 선택 방법 (1) -->
 <p th:text="${ member.username }"></p>
 <p th:text="${ member.password }"></p>
 
 th:object : 객체를 선택한다.<br>
+<!-- 객체 내부 요소 선택 방법 (2) -->
 *{ 변수 } : 선택한 객체의 필드에 접근<br>
 <th:block th:object="${ member }">
   <p th:text="*{ username }"></p>
@@ -17,8 +19,11 @@ th:object : 객체를 선택한다.<br>
 </th:block>
 
 객체 리스트 출력<br>
+<!-- 객체 내부 요소 선택 방법 (3) -->
 <table border="1">
+<!--  status : 타임리프 반복 상태 변수 -->
   <tr th:each="member, status : ${ list }">
+<!--   status.count : 1부터 순서 출력 -->
     <td><span th:text="${ status.count }"></span></td>
     <td><span th:text="${ member.username }"></span></td>
     <td><span th:text="${ member.password }"></span></td>
@@ -26,6 +31,7 @@ th:object : 객체를 선택한다.<br>
 </table>
 
 <br>
+<!-- 타임리프 status 속성 -->
 status.index : 현재 반복 인덱스 (0부터 시작합니다.)<br>
 status.count : 현재 반복 인덱스 (1부터 시작합니다.)<br>
 status.size : 총 요소 수<br>

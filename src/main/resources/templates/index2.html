@@ -24,8 +24,11 @@ th:if <br>
     <p>address_null은 null이 아닙니다.</p>
   </th:block>
 
+<!--  '#' 붙이는 이유 = 유틸리티 객체(Thymeleaf 내부에서 제공하는 객체)-->
+
   defaultString함수 <br>
   <p th:text="${ #strings.defaultString(address_null, 'address_null은 null입니다.') }">
+<!--    null이면 뒤의 내용을 반환 -->
     defaultString함수 결과
   </p>
 
