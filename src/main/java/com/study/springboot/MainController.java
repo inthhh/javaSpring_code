@@ -21,4 +21,10 @@ public class MainController {
         System.out.println("name_html = " + model.getAttribute("name_html"));
         return "index";
     }
+    
+    @GetMapping("/index2")
+    public String index2(Model model){
+        model.addAttribute("address_null", "123");
+        return "index2";
+    }
 }

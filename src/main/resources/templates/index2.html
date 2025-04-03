@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- xmlns : xml name space XML의 태그와 속성을 정의하는 곳 -->
+<!-- th : 타임리프 관련 태그나 속성은 th로 시작함. -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>index2.html</title>
+</head>
+<body>
+  <h2>타임리프의 null 체크</h2>
+<!--  조건적인 렌더링-->
+th:if <br>
+<!-- th: block : 자체적인 로직을 위한 블럭 -->
+  <th:block th:if="${ address_null == null }">
+    <p>address_null은 null입니다.</p>
+  </th:block>
+  <th:block th:if="${ address_null != null }">
+    <p>address_null은 null이 아닙니다.</p>
+  </th:block>
+<!--  else -->
+  th:unless<br>
+
+  <th:block th:unless="${ address_null == null }">
+    <p>address_null은 null이 아닙니다.</p>
+  </th:block>
+
+</body>
+</html>
