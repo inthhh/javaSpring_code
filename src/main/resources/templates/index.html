@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- xmlns : xml name space XML의 태그와 속성을 정의하는 곳 -->
+<!-- th : 타임리프 관련 태그나 속성은 th로 시작함. -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index.html</title>
+</head>
+<body>
+  <h2>Welcome to 타임리프!</h2>
+  <p>테스트</p>
+  <h4>innerText의 경우</h4>
+<!--  인자 전달될떄만 아래 내용이 화면에 표시됨-->
+    <p th:text="${name_text}"> : innerText</p>
+  <h4>innerHtml의 경우</h4>
+  <!--  인자 전달될떄만 아래 내용이 화면에 표시됨-->
+    <p th:utext="${name_html}"> : innerHtml</p>
+</body>
+</html>
