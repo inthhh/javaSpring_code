@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Component
 @Getter
-//@Setter
-//@NoArgsConstructor
-//@AllArgsConstructor
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
+    @Value("${my.username}")
+    private String username;
     
-    @Value ("${my.username}")
-    String username;
     @Value("${my.password}")
-    String password;
-}
+    private String password;
+    }
