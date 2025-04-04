@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>계산기 프로그램</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          padding: 30px;
+        }
+
+        h2 {
+          margin-bottom: 30px;
+        }
+
+        label {
+          font-size: 20px;
+          margin-right: 10px;
+        }
+
+        input[type="number"] {
+          width: 100px;
+          height: 30px;
+          font-size: 18px;
+          margin-bottom: 15px;
+          text-align: center;
+          background-color: #dcdcdc;
+          border: none;
+        }
+
+        #result {
+          width: 120px;
+          height: 35px;
+          font-size: 20px;
+          background-color: #555;
+          color: white;
+          margin-bottom: 25px;
+        }
+
+        .btn {
+          display: block;
+          width: 200px;
+          height: 40px;
+          margin: 10px auto;
+          font-size: 18px;
+          background-color: #2979ff;
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+
+        .btn:hover {
+          background-color: #1565c0;
+        }
+
+        .btn-clear {
+          background-color: #e53935;
+        }
+
+        .btn-clear:hover {
+          background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+<h2>계산기 프로그램</h2>
+
+<div>
+    <label for="num1">숫자 1</label>
+    <input type="number" id="num1" value="10"><br>
+
+    <label for="num2">숫자 2</label>
+    <input type="number" id="num2" value="20"><br>
+
+    <label for="result">연산 결과</label>
+    <input type="text" id="result" readonly value=""><br>
+</div>
+
+<button class="btn" onclick="sendToAPI('+')">덧셈</button>
+<button class="btn" onclick="sendToAPI('-')">뺄셈</button>
+<button class="btn" onclick="sendToAPI('*')">곱셈</button>
+<button class="btn" onclick="sendToAPI('/')">나눗셈</button>
+<button class="btn btn-clear" onclick="clearAll()">지우기</button>
+
+<script>
+    async function sendToAPI(operator) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+
+      try {
+        const response = await fetch("http://localhost:8080/api/calculate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            "num1": num1,
+            "num2": num2,
+            "operator": operator  // 연산자
+          })
+        });
+
+        const data = await response.json();
+        console.log(data);
+        if (data.status === "ok") {
+          document.getElementById("result").value = data.result;
+        } else {
+          document.getElementById("result").value = "오류 발생";
+        }
+      } catch (error) {
+        console.error("API 호출 오류:", error);
+        document.getElementById("result").value = "서버 오류";
+      }
+    }
+
+    function clearAll() {
+      document.getElementById("num1").value = "";
+      document.getElementById("num2").value = "";
+      document.getElementById("result").value = "";
+    }
+</script>
+</body>
+</html>
