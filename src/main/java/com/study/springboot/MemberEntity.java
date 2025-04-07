@@ -1,9 +1,7 @@
 package com.study.springboot;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Locked;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 
@@ -23,6 +21,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "member")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor // 기본생성자 필수
 //@Setter -> entity에서는 잘 사용하지 않음 (비추)
 public class MemberEntity {
     // @Id : 기본키 id열로 사용한다는 의미
