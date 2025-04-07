@@ -1,10 +1,13 @@
 package com.study.springboot;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Locked;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+
+import java.time.LocalDate;
 
 //데이타 모델링 클래스(데이타를 담고 있는)의 종류
 //1. DTO 클래스 : Data Transfer Object, 데이타가 자주 바뀜. 로직(코드) 포함 안됨.
@@ -22,4 +25,19 @@ import org.springframework.stereotype.Controller;
 @Getter
 //@Setter -> entity에서는 잘 사용하지 않음 (비추)
 public class MemberEntity {
+    // @Id : 기본키 id열로 사용한다는 의미
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 혹은 AUTO
+    private Long id; // bigint
+    // @Column(name="db 컬럼 이름") : DB열과 매칭 - 변수 이름과 DB열의 이름이 다를 때 매칭해줌(생략 가능)
+    @Column(name="user_id")
+    private String user_id; // varchar
+    private String user_pw;
+    private String user_name;
+    private String user_role;
+    
+    //@JsonFormat : @RequestBody @ResponseBody 매핑
+    //@DateTimeFormat : @RequestParam @ModelAttribute 매핑
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate joindate; // date
 }
