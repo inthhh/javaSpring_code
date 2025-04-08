@@ -9,7 +9,7 @@
 <div class="w-full max-w-md bg-black p-6 rounded">
   <h2 class="text-center text-2xl font-bold mb-6">자판기 상품 추가</h2>
 
-  <form th:action="@{/add}" method="post" id="productForm" class="space-y-4">
+  <form th:action="@{/add}" method="post" onsubmit="return handleSubmit()" id="productForm" class="space-y-4">
     <div>
       <label class="block text-left font-semibold mb-1" for="name">상품명:</label>
       <input
@@ -67,6 +67,12 @@
   function goBack() {
     window.location.href = 'http://localhost:8080';
   }
+
+  function handleSubmit() {
+    alert("상품이 성공적으로 추가되었습니다!");
+    return true;
+  }
+
 </script>
 </body>
 </html>

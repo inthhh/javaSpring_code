@@ -9,7 +9,7 @@
 <div class="w-full max-w-md bg-black p-6 rounded">
   <h2 class="text-center text-2xl font-bold mb-6">자판기 상품 수정</h2>
 
-  <form th:action="@{/edit}" method="post" id="productForm" class="space-y-4">
+  <form th:action="@{/edit}" method="post" onsubmit="return handleSubmit()" id="productForm" class="space-y-4">
     <!-- 인덱스도 함께 전달 -->
     <input type="hidden" name="index" th:value="${product.index}" />
 
@@ -51,6 +51,11 @@
 <script>
   function goBack() {
     window.location.href = "/";
+  }
+
+  function handleSubmit() {
+    alert("상품이 성공적으로 수정되었습니다!");
+    return true;
   }
 </script>
 </body>

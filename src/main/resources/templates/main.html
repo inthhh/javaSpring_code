@@ -54,7 +54,8 @@
       </td>
       <td class="border px-4 py-2">
         <a th:href="@{'/remove?index=' + ${stat.index}}"
-           class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">삭제</a>
+           class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+          onclick="return handleSubmit()">삭제</a>
       </td>
     </tr>
     </tbody>
@@ -75,4 +76,11 @@
 </button>
 
 </body>
+<script>
+  function handleSubmit() {
+    alert("상품이 성공적으로 삭제되었습니다!");
+    return true; // ← 제출 계속 진행
+  }
+
+</script>
 </html>

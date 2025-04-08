@@ -61,7 +61,7 @@ public class MainController {
     }
     
     @GetMapping("/remove")
-    public String remove(@RequestParam int index, Model model) {
+    public String remove(@RequestParam("index") int index, Model model) {
         productList.remove(index);
         model.addAttribute("productList", productList); // 리스트를 넘겨줍니다.
         return "main";
