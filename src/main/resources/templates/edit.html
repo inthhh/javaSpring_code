@@ -11,7 +11,7 @@
 
   <form th:action="@{/edit}" method="post" id="productForm" class="space-y-4">
     <!-- 인덱스도 함께 전달 -->
-    <input type="hidden" name="index" th:value="${product.index}" />
+    <input type="hidden" name="index" />
 
     <div>
       <label for="name" class="block text-left font-semibold mb-1">상품명:</label>

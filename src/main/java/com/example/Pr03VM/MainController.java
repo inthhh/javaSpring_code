@@ -30,7 +30,10 @@ public class MainController {
     }
     
     @GetMapping("/edit")
-    public String edit(@RequestParam("index") int index) {
+    public String edit(@RequestParam("index") int index, Model model) {
+        ProductDto product = productList.get(index);  // 리스트에서 해당 항목 꺼냄
+        model.addAttribute("product", product);       // 템플릿에서 사용할 변수로 등록
+        model.addAttribute("index", index);           // hidden으로 index도 같이 넘겨줄 수 있음
         return "edit";
     }
     
