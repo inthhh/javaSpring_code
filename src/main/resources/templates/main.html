@@ -7,12 +7,12 @@
 </head>
 <body class="bg-gray-700 text-white min-h-screen flex flex-col items-center p-6">
 
-<h1 class="bg-white text-red-700 text-2xl font-bold px-6 py-3 rounded-lg mb-6">
+<h1 id="titleText" class="bg-white text-red-700 text-2xl font-bold px-6 py-3 rounded-lg mb-6">
   ★ 자판기 프로그램 ★
 </h1>
 
 <div class="flex justify-between items-center w-full max-w-4xl mb-4">
-  <button class="bg-white text-red-700 font-bold px-4 py-2 rounded">▽ 자판기 상품 목록</button>
+  <button id="listButton" class="bg-white text-red-700 font-bold px-4 py-2 rounded">▽ 자판기 상품 목록</button>
   <div class="flex items-center space-x-2">
     <span>한글</span>
     <button onclick="toggleLang(this)" class="w-12 h-6 bg-white rounded-full relative">
@@ -34,12 +34,12 @@
          th:if="${productList != null and !#lists.isEmpty(productList)}">
     <thead class="bg-red-100">
     <tr>
-      <th class="border px-4 py-2 w-[10%]">번호</th>
-      <th class="border px-4 py-2 w-[20%]">상품명</th>
-      <th class="border px-4 py-2 w-[20%]">가격</th>
-      <th class="border px-4 py-2 w-[20%]">유통기한</th>
-      <th class="border px-4 py-2 w-[15%]">수정</th>
-      <th class="border px-4 py-2 w-[15%]">삭제</th>
+      <th id="thNum" class="border px-4 py-2 w-[10%]">번호</th>
+      <th id="thName" class="border px-4 py-2 w-[20%]">상품명</th>
+      <th id="thPrice" class="border px-4 py-2 w-[20%]">가격</th>
+      <th id="thDate" class="border px-4 py-2 w-[20%]">유통기한</th>
+      <th id="thEdit" class="border px-4 py-2 w-[15%]">수정</th>
+      <th id="thDelete" class="border px-4 py-2 w-[15%]">삭제</th>
     </tr>
     </thead>
     <tbody>
@@ -49,11 +49,11 @@
       <td class="border px-4 py-2" th:text="${product.price}">3000</td>
       <td class="border px-4 py-2" th:text="${product.limit_date}">2025-04-10</td>
       <td class="border px-4 py-2">
-        <a th:href="@{'/edit?index=' + ${stat.index}}"
+        <a id="editBtn" th:href="@{'/edit?index=' + ${stat.index}}"
            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">수정</a>
       </td>
       <td class="border px-4 py-2">
-        <a th:href="@{'/remove?index=' + ${stat.index}}"
+        <a id="removeBtn" th:href="@{'/remove?index=' + ${stat.index}}"
            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
           onclick="return handleSubmit()">삭제</a>
       </td>
@@ -61,7 +61,7 @@
     </tbody>
   </table>
 
-  <p class="text-red-700 font-bold mt-4"
+  <p id="countNotice" class="text-red-700 font-bold mt-4"
      th:if="${productList != null}"
      th:text="'▲ 총 ' + ${productList.size()} + '개의 상품이 있습니다.'">
     총 개수 표시
@@ -80,6 +80,66 @@
   function handleSubmit() {
     alert("상품이 성공적으로 삭제되었습니다!");
     return true; // ← 제출 계속 진행
+  }
+
+  function toggleLang(btn) {
+    const dot = btn.querySelector(".dot");
+    dot.classList.toggle("translate-x-5");
+
+    const isEnglish = dot.classList.contains("translate-x-5");
+
+    const title = document.getElementById("titleText");
+    const listBtn = document.getElementById("listButton");
+    const countNotice = document.getElementById("countNotice");
+    const addProductBtn = document.getElementById("addProductBtn");
+
+    const thNum = document.getElementById("thNum");
+    const thName = document.getElementById("thName");
+    const thPrice = document.getElementById("thPrice");
+    const thDate = document.getElementById("thDate");
+    const thEdit = document.getElementById("thEdit");
+    const thDelete = document.getElementById("thDelete");
+
+    const editBtn = document.getElementById("editBtn");
+    const removeBtn = document.getElementById("removeBtn");
+
+    if (isEnglish) {
+      title.textContent = "★ VENDING MACHINE ★";
+      listBtn.textContent = "▽ Product List";
+      countNotice.textContent = "▲ Total (" + document.querySelectorAll("tbody tr").length + " items)";
+      addProductBtn.textContent = "Add Product";
+
+      thNum.textContent = "Num";
+      thName.textContent = "Name";
+      thPrice.textContent = "Price";
+      thDate.textContent = "Limit Date";
+      thEdit.textContent = "Edit";
+      thDelete.textContent = "Remove";
+
+      if (editBtn) editBtn.textContent = "Edit";
+      if (removeBtn) removeBtn.textContent = "Remove";
+
+    } else {
+      title.textContent = "★ 자판기 프로그램 ★";
+      listBtn.textContent = "▽ 자판기 상품 목록";
+      countNotice.textContent = "▲ 총 " + document.querySelectorAll("tbody tr").length + "개의 상품이 있습니다.";
+      addProductBtn.textContent = "상품 추가하기!";
+
+      thNum.textContent = "번호";
+      thName.textContent = "상품명";
+      thPrice.textContent = "가격";
+      thDate.textContent = "유통기한";
+      thEdit.textContent = "수정";
+      thDelete.textContent = "삭제";
+
+      if (editBtn) editBtn.textContent = "수정";
+      if (removeBtn) removeBtn.textContent = "삭제";
+    }
+  }
+
+  function handleSubmit() {
+    alert("상품이 성공적으로 삭제되었습니다!");
+    return true;
   }
 
 </script>
