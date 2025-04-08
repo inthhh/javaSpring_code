@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8" />
   <title>자판기 상품 추가</title>
@@ -9,7 +9,7 @@
 <div class="w-full max-w-md bg-black p-6 rounded">
   <h2 class="text-center text-2xl font-bold mb-6">자판기 상품 추가</h2>
 
-  <form action="@{/add}" method="post" id="productForm" class="space-y-4">
+  <form th:action="@{/add}" method="post" id="productForm" class="space-y-4">
     <div>
       <label class="block text-left font-semibold mb-1" for="name">상품명:</label>
       <input
