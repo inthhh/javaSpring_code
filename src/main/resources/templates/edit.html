@@ -11,7 +11,7 @@
 
   <form th:action="@{/edit}" method="post" id="productForm" class="space-y-4">
     <!-- 인덱스도 함께 전달 -->
-    <input type="hidden" name="index" />
+    <input type="hidden" name="index" th:value="${product.index}" />
 
     <div>
       <label for="name" class="block text-left font-semibold mb-1">상품명:</label>
@@ -31,7 +31,7 @@
 
     <div>
       <label for="date" class="block text-left font-semibold mb-1">유통기한:</label>
-      <input type="date" id="date" name="limit_date" required
+      <input type="date" id="date" name="date" required
              class="w-full px-4 py-2 rounded bg-white text-black"
              th:value="${product.limit_date}" />
     </div>
