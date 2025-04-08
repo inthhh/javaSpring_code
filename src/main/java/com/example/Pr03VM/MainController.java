@@ -2,6 +2,7 @@ package com.example.Pr03VM;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,8 @@ public class MainController {
     private List<ProductDto> productList = new ArrayList<>();
     
     @GetMapping("/")
-    public String main(){
+    public String main(Model model) {
+        model.addAttribute("productList", productList); // 리스트를 넘겨줍니다.
         return "main";
     }
     
@@ -37,7 +39,7 @@ public class MainController {
                       @RequestParam("price") int price,
                       @RequestParam("date") LocalDate date){
         productList.add(new ProductDto(name, price, date));
-        return "main";
+        return "redirect:/"; // 리다이렉트 -> 뷰 및 url이 모두 변경
     }
     
     @PostMapping("/edit")
@@ -46,11 +48,18 @@ public class MainController {
                       @RequestParam("price") int price,
                       @RequestParam("date") LocalDate date){
         productList.set(index, new ProductDto(name, price, date));
-        return "main";
+        return "redirect:/";
     }
     
     @GetMapping("/product")
     public String product(@RequestParam int index){
+        return "main";
+    }
+    
+    @GetMapping("/remove")
+    public String remove(@RequestParam int index, Model model) {
+        productList.remove(index);
+        model.addAttribute("productList", productList); // 리스트를 넘겨줍니다.
         return "main";
     }
 }
