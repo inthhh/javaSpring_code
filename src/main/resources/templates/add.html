@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>자판기 상품 추가</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-700 min-h-screen flex items-center justify-center text-white px-4">
+<div class="w-full max-w-md bg-black p-6 rounded">
+  <h2 class="text-center text-2xl font-bold mb-6">자판기 상품 추가</h2>
+
+  <form action="@{/add}" method="post" id="productForm" class="space-y-4">
+    <div>
+      <label class="block text-left font-semibold mb-1" for="name">상품명:</label>
+      <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full px-4 py-2 rounded bg-white text-black"
+              placeholder="예: 상추버거"
+      />
+    </div>
+
+    <div>
+      <label class="block text-left font-semibold mb-1" for="price">가격:</label>
+      <input
+              type="number"
+              id="price"
+              name="price"
+              required
+              class="w-full px-4 py-2 rounded bg-white text-black"
+              placeholder="예: 3000"
+      />
+    </div>
+
+    <div>
+      <label class="block text-left font-semibold mb-1" for="date">유통기한:</label>
+      <input
+              type="date"
+              id="date"
+              name="date"
+              required
+              class="w-full px-4 py-2 rounded bg-white text-black"
+      />
+    </div>
+
+    <div class="flex justify-between pt-4">
+      <button
+              type="submit"
+              class="bg-red-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+      >
+        상품 추가 완료!
+      </button>
+      <button
+              type="button"
+              onclick="goBack()"
+              class="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded"
+      >
+        돌아가기
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = 'http://localhost:8080';
+  }
+</script>
+</body>
+</html>

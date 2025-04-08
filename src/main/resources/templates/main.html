@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>자판기 프로그램</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-700 text-white min-h-screen flex flex-col items-center p-6">
+<h1 th:text="${isEnglish} ? '★ VENDING MACHINE ★' : '★ 자판기 프로그램 ★'"
+    class="bg-white text-red-700 text-2xl font-bold px-6 py-3 rounded-lg mb-6">
+  제목
+</h1>
+
+<div class="flex justify-between items-center w-full max-w-4xl mb-4">
+  <button th:text="${isEnglish} ? '▽ Product List' : '▽ 자판기 상품 목록'" class="bg-white text-red-700 font-bold px-4 py-2 rounded"></button>
+  <div class="flex items-center space-x-2">
+    <span>한글</span>
+    <!-- toggleLang()는 자바스크립트로 구현한 상태 유지 -->
+    <button onclick="toggleLang(this)" class="w-12 h-6 bg-white rounded-full relative">
+      <span class="dot absolute top-0.5 left-1 w-5 h-5 bg-red-700 rounded-full transition-all duration-300"></span>
+    </button>
+    <span>ENG</span>
+  </div>
+  <div class="text-2xl">➖</div>
+</div>
+
+<div class="bg-white text-black rounded-lg w-full max-w-4xl p-4 mb-4">
+  <p class="text-center font-medium py-4" th:if="${productList.size() == 0}" th:text="${isEnglish} ? 'Product list is empty.' : '상품 목록이 비어있습니다.'">
+    상품 없음 메시지
+  </p>
+
+  <table class="w-full table-auto border border-red-300" th:if="${productList.size() > 0}">
+    <thead class="bg-red-100">
+    <tr>
+      <th class="border px-4 py-2 w-[10%]" th:text="${isEnglish} ? 'Num' : '번호'"></th>
+      <th class="border px-4 py-2 w-[20%]" th:text="${isEnglish} ? 'Name' : '상품명'"></th>
+      <th class="border px-4 py-2 w-[20%]" th:text="${isEnglish} ? 'Price' : '가격'"></th>
+      <th class="border px-4 py-2 w-[20%]" th:text="${isEnglish} ? 'LimitDate' : '유통기한'"></th>
+      <th class="border px-4 py-2 w-[15%]" th:text="${isEnglish} ? 'Edit' : '수정'"></th>
+      <th class="border px-4 py-2 w-[15%]" th:text="${isEnglish} ? 'Remove' : '삭제'"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" th:each="product, stat : ${productList}">
+      <td class="border px-4 py-2" th:text="${stat.count}"></td>
+      <td class="border px-4 py-2" th:text="${product.name}"></td>
+      <td class="border px-4 py-2" th:text="${product.price}"></td>
+      <td class="border px-4 py-2" th:text="${product.limit_date}"></td>
+      <td class="border px-4 py-2">
+        <a th:href="@{'/edit?index=' + ${stat.index}}"
+           th:text="${isEnglish} ? 'Edit' : '수정'"
+           class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"></a>
+      </td>
+      <td class="border px-4 py-2">
+        <a th:href="@{'/remove?index=' + ${stat.index}}"
+           th:text="${isEnglish} ? 'Remove' : '삭제'"
+           class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p class="text-red-700 font-bold mt-4" th:text="${isEnglish} ? '▲ Total (' + ${productList.size()} + ' item)' : '▲ 총 ' + ${productList.size()} + '개의 상품이 있습니다.'">
+    총 개수 표시
+  </p>
+</div>
+
+<button
+        id="addProductBtn"
+        th:text="${isEnglish} ? 'Add Product' : '상품 추가하기!'"
+        class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded"
+        onclick="moveToAdd()">
+</button>
+</body>
+</html>
