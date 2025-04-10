@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Builder  //객체생성시 사용 - 생성자함수 대체
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberEntitiy {
+public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
