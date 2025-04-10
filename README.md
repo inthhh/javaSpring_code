@@ -4,3 +4,4 @@ Java Spring/Springboot 수업 내용과 개인적 연습 기록을 담는 공간
 
 - 실습 문제 자료 : https://codinggangsa.notion.site/3-70f16435c54649ef870d9e27028da48d
 - 자판기 (with REST API) : https://github.com/inthhh/Spring_Vending
+- ex12_H2DB_Test 브랜치 : 테스트 코드 실습
