@@ -18,5 +18,9 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     //findBy열이름() : SQL - select 열이름 from 테이블 문으로 실행
     //  예) findById(2L) : select * from member where id=2
     //  예) findByUserId("hong") : select * from where user_id='hong'
+    
     List<MemberEntity> findByUserId(String userId);
+    List<MemberEntity> findFirst5ByUserIdAndUserNameOrderByIdDesc(
+            String userid, String username
+    );
 }

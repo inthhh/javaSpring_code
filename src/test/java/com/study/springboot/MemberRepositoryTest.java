@@ -74,10 +74,17 @@ class MemberRepositoryTest {
 //                memberRepository.findAll();
 //        assertEquals(3, list.size());
         
-        List<MemberEntity> list2 =
+        List<MemberEntity> list1 =
                 //사용자 정의 쿼리 함수
                 memberRepository.findByUserId("hong");
-        assertEquals(1, list2.size());
+        assertEquals(1, list1.size(), "list1 size 검증 실패");
+        
+        List<MemberEntity> list2 =
+                //사용자 정의 쿼리 함수
+                memberRepository.findFirst5ByUserIdAndUserNameOrderByIdDesc(
+                        "hong", "홍길동"
+                );
+        assertEquals(1, list2.size(),"list1 size 검증 실패");
     }
 
 }
