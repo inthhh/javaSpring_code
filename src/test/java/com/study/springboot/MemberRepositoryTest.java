@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @SpringBootTest // 스프링 부트 전체를 실행시켜서 통합 테스트할 수 있게 함
     // 실제 서비스랑 비슷한 환경으로 테스트 가능
@@ -86,5 +88,32 @@ class MemberRepositoryTest {
                 );
         assertEquals(1, list2.size(),"list1 size 검증 실패");
     }
-
+    
+    @Test
+    @DisplayName("JPQL 테스트")
+    public void jpqlQuery(){
+        List<MemberEntity> list =
+                memberRepository.findByUserId_JPQL("hong");
+        assertEquals(1, list.size());
+    }
+    @Test
+    @DisplayName("Native Query 테스트")
+    public void nativeQuery(){
+        List<MemberEntity> list =
+                memberRepository.findByUserId_Native("admin");
+        assertEquals(1, list.size());
+        
+        int count = memberRepository.updateById_Native(1L, "gildong");
+        assertEquals(1, count);
+        
+        Optional<MemberEntity> optional = memberRepository.findById(1L);
+        optional.ifPresentOrElse( unwrapped -> {
+            assertEquals("gildong", unwrapped.getUserId());
+        }, () -> {
+            fail("1L 엔티티를 찾지 못했습니다.");
+        } );
+        
+    }
+    
+    
 }
